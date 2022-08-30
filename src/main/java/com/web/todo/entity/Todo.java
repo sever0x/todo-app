@@ -2,9 +2,7 @@ package com.web.todo.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "todo")
@@ -15,6 +13,8 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class Todo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String content;
+    private int priority;
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <div class="create-todo">
+        <form th:action="@{/}" th:object="${todo}" method="post">
+            <label>Content: </label><input type="text" th:field="*{content}">
+            <label>Priority: </label><input type="number" th:field="*{priority}">
+            <input type="submit" value="Create new TODO">
+        </form>
+    </div>
+    <div class="content" th:each="todo : ${todos}">
+        <div class="todo">
+            <ul>
+                <li>
+                    <p>
+                        <span th:text="${todo.id}"></span>
+                        <span th:text="${todo.content}"></span>
+                        <span th:text="${todo.priority}"></span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
