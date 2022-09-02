@@ -11,10 +11,16 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Todo {
+public class Todo implements Comparable<Todo> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String content;
-    private int priority;
+    private Boolean priority;
+
+
+    @Override
+    public int compareTo(Todo o) {
+        return Boolean.compare(getPriority(), o.getPriority());
+    }
 }

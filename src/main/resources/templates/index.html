@@ -9,7 +9,7 @@
     <div class="create-todo">
         <form th:action="@{/}" th:object="${todo}" method="post">
             <label>Content: </label><input type="text" th:field="*{content}">
-            <label>Priority: </label><input type="number" th:field="*{priority}">
+            <label>Priority: </label><input type="checkbox" th:field="*{priority}">
             <input type="submit" value="Create new TODO">
         </form>
     </div>
@@ -21,9 +21,19 @@
                         <span th:text="${todo.id}"></span>
                         <span th:text="${todo.content}"></span>
                         <span th:text="${todo.priority}"></span>
+                    <form th:action="@{/delete/{id}(id=${todo.id})}" method="post">
+                        <input type="submit" value="Complete">
+                    </form>
                     </p>
                 </li>
             </ul>
+        </div>
+    </div>
+    <div class="quote">
+        <div class="content">
+            <p>
+                "<span class="quote-text" th:text="${quote[0]}"></span>" - <span class="quote-author" th:text="${quote[1]}"></span>
+            </p>
         </div>
     </div>
 </body>
