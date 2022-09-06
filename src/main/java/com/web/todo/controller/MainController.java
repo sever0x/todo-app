@@ -1,7 +1,5 @@
 package com.web.todo.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.todo.api.RandomQuote;
 import com.web.todo.entity.Todo;
 import com.web.todo.repo.TodoRepository;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -31,7 +30,7 @@ public class MainController {
         model.addAttribute("todo", todo);
         model.addAttribute("quote", new RandomQuote().getRandomQuote());
 
-        return "index";
+        return "indexx";
     }
 
     @PostMapping({"", "/"})
@@ -44,6 +43,19 @@ public class MainController {
     @PostMapping("/delete/{id}")
     public String deleteTodo(@PathVariable int id) {
         todoRepository.deleteById(id);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/change-state/{id}")
+    public String changeTodoState(@PathVariable int id) {
+        Optional<Todo> todoOptional = todoRepository.findById(id);
+        Todo todo = todoOptional.orElse(null);
+
+        if (todo != null) {
+            todo.setIsComplete(!todo.getIsComplete());
+            todoRepository.save(todo);
+        }
 
         return "redirect:/";
     }
