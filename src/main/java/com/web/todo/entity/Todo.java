@@ -1,6 +1,5 @@
 package com.web.todo.entity;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +16,6 @@ public class Todo implements Comparable<Todo> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
     private String content;
     private Boolean priority;
     private Boolean isComplete = false;

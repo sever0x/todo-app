@@ -7,3 +7,9 @@ function changeTodoState(checkboxElem) {
     }
     $.post("/change-state/" + checkboxElem.id);
 }
+
+function deleteTodo(btn) {
+    var parent = btn.parentNode;
+    $.post("/delete/" + parent.querySelector('.check-complete').id);
+    parent.parentNode.parentNode.remove();
+}

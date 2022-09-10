@@ -30,7 +30,7 @@ public class MainController {
         model.addAttribute("todo", todo);
         model.addAttribute("quote", new RandomQuote().getRandomQuote());
 
-        return "indexx";
+        return "index";
     }
 
     @PostMapping({"", "/"})

@@ -1,40 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Light</title>
+
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <div class="create-todo">
-        <form th:action="@{/}" th:object="${todo}" method="post">
-            <label>Content: </label><input type="text" th:field="*{content}">
-            <label>Priority: </label><input type="checkbox" th:field="*{priority}">
-            <input type="submit" value="Create new TODO">
-        </form>
-    </div>
-    <div class="content" th:each="todo : ${todos}">
-        <div class="todo">
-            <ul>
-                <li>
-                    <p>
-                        <span th:text="${todo.id}"></span>
-                        <span th:text="${todo.content}"></span>
-                        <span th:text="${todo.priority}"></span>
-                    <form th:action="@{/delete/{id}(id=${todo.id})}" method="post">
-                        <input type="submit" value="Complete">
-                    </form>
-                    </p>
-                </li>
-            </ul>
+
+<body class="body">
+    <div class="container">
+        <div class="wrapper app-head">
+            <div class="title">
+                <h3>Todo Light</h3>
+                <a href="https://github.com/shdwraze">github/shdwraze</a>
+                <hr>
+            </div>
+
+            <div class="create-todo">
+                <form th:action="@{/}" th:object="${todo}" method="post">
+                    <div class="first-place">
+                        <input type="text" class="field" th:field="*{content}">
+                        <input type="submit" value="Submit" class="btn">
+                    </div>
+                    <div class="second-place">
+                        <input type="checkbox" id="check" class="check" th:field="*{priority}">
+                        <label for="check" class="check-label">Mark as important</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(todos)}" class="todo-list scroll">
+            <div class="todo" th:each="todo : ${todos}">
+                <div class="content-wrapper">
+                    <div class="content">
+                        <div class="task" th:classappend="${todo.isComplete ? 'complete' : ''}"
+                             th:text="${todo.content}">text todo</div><span th:text="${todo.priority ? '*' : ''}">priority</span>
+                    </div>
+                    <div class="control-elements">
+                        <input type="checkbox" name="complete" th:id="${todo.id}" th:checked="${todo.isComplete}"
+                               class="check-complete" onchange="changeTodoState(this)">
+                        <!-- <form th:action="@{/delete/{id}(id=${todo.id})}" method="post">
+                            <input type="submit" value="x" class="test-btn">
+                        </form> -->
+                        <input type="submit" value="x" class="test-btn" onclick="deleteTodo(this);">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote wrapper">
+            <p th:text="'“' + ${quote[0]} + '” - ' + ${quote[1]}">quote</p>
         </div>
     </div>
-    <div class="quote">
-        <div class="content">
-            <p>
-                "<span class="quote-text" th:text="${quote[0]}"></span>" - <span class="quote-author" th:text="${quote[1]}"></span>
-            </p>
-        </div>
-    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
+
 </html>
