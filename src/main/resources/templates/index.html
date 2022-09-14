@@ -20,9 +20,9 @@
             </div>
 
             <div class="create-todo">
-                <form th:action="@{/}" th:object="${todo}" method="post">
+                <form name="todo" th:action="@{/}" th:object="${todo}" method="post">
                     <div class="first-place">
-                        <input type="text" class="field" th:field="*{content}">
+                        <input type="text" class="field" th:field="*{content}" required>
                         <input type="submit" value="Submit" class="btn">
                     </div>
                     <div class="second-place">
@@ -43,9 +43,6 @@
                     <div class="control-elements">
                         <input type="checkbox" name="complete" th:id="${todo.id}" th:checked="${todo.isComplete}"
                                class="check-complete" onchange="changeTodoState(this)">
-                        <!-- <form th:action="@{/delete/{id}(id=${todo.id})}" method="post">
-                            <input type="submit" value="x" class="test-btn">
-                        </form> -->
                         <input type="submit" value="x" class="test-btn" onclick="deleteTodo(this);">
                     </div>
                 </div>

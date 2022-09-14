@@ -192,6 +192,7 @@ body {
     display: flex;
     font-size: 14px;
     letter-spacing: 0.1em;
+    max-width: 320px;
 }
 
 .content span {
@@ -212,10 +213,11 @@ body {
     content: "Г";
     font-family: Consolas;
     position: absolute;
+    font-size: 14px;
     color: #fff;
     left: 50%;
-    top: 50%;
-    transform: translate(-45%, -50%) rotate(-135deg);
+    top: 45%;
+    transform: translate(-50%, -50%) rotate(-135deg);
 }
 
 .control-elements a {
